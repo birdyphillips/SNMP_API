@@ -906,7 +906,7 @@ FIELDS = ",".join([
 
 
 def get_token():
-    base_url = os.getenv('SCOPE_API_URL', 'https://scope-api.charter.com')
+    base_url = os.getenv('SCOPE_API_URL', 'https://<scope-api-host>')
     user = os.getenv('SCOPE_API_USER')
     password = os.getenv('SCOPE_API_PASS')
     if not user or not password:
@@ -926,7 +926,8 @@ def get_token():
 
 
 def fetch_metrics(mac, token):
-    url = f"https://scope-api.charter.com/v7/cablemodems/{mac}/metrics?fields={FIELDS}"
+    base_url = os.getenv('SCOPE_API_URL', 'https://<scope-api-host>')
+    url = f"{base_url}/v7/cablemodems/{mac}/metrics?fields={FIELDS}"
     headers = {"accept": "application/json", "authorization": token, "clientId": "web"}
     response = requests.get(url, headers=headers)
     data = response.json()
@@ -1051,7 +1052,7 @@ if __name__ == "__main__":
                         help="Continuously poll every N seconds, printing delta each cycle (Ctrl+C to stop)")
     args = parser.parse_args()
 
-    modem_macs = args.macs if args.macs else ["08a7c0885eff"]
+    modem_macs = args.macs if args.macs else ["<modem-mac-address>"]
     wait_s     = args.wait
     interval_s = args.interval
 

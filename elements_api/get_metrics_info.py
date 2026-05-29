@@ -42,7 +42,7 @@ load_dotenv()
 lock = Semaphore(25)
 
 # Read credentials from .env file
-BASE_URL = os.getenv('ELEMENTS_API_URL', 'https://api.elements.charter.com')
+BASE_URL = os.getenv('ELEMENTS_API_URL', 'https://<elements-api-host>')
 USER = os.getenv('ELEMENTS_API_USER')
 PASSWORD = os.getenv('ELEMENTS_API_PASS')
 
